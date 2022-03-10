@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "1018259331889",
+    "firebase_url": "https://instaclonejava-947c2-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "instaclonejava-947c2",
+    "storage_bucket": "instaclonejava-947c2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1018259331889:android:7ed67dbbda96c365d9ee10",
+        "android_client_info": {
+          "package_name": "com.alpebubekir.instagram"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1018259331889-rhdoq957dvlpng99527cou7thj6qacp4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGTiLBfMmmDiEmw-bFY6e61eXur5LVANw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1018259331889-rhdoq957dvlpng99527cou7thj6qacp4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1018259331889:android:bfa38fca74781434d9ee10",
+        "android_client_info": {
+          "package_name": "com.alpebubekir.languageapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1018259331889-rhdoq957dvlpng99527cou7thj6qacp4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGTiLBfMmmDiEmw-bFY6e61eXur5LVANw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1018259331889-rhdoq957dvlpng99527cou7thj6qacp4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
