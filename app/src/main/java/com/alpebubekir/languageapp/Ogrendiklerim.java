@@ -31,21 +31,23 @@ public class Ogrendiklerim extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ogrendiklerim);
 
-        ogrenildiRef = FirebaseDatabase.getInstance("https://languageapp-f2602-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Ogrenildi");
+        ogrenildiRef = FirebaseDatabase.getInstance("https://languageapp-f2602-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Ogren");
         ogrenildiRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot: snapshot.getChildren())
                 {
-                    String ses = null;
-                    if (dataSnapshot.child("ses").getValue().toString() != "0")
+                    if (dataSnapshot.child("ogrenen").child(MainActivity.id).exists())
                     {
-                        ses = dataSnapshot.child("ses").getValue().toString();
+                        String ses = null;
+                        if (dataSnapshot.child("ses").getValue().toString() != "0")
+                        {
+                            ses = dataSnapshot.child("ses").getValue().toString();
+                        }
+
+                        Word word = new Word(dataSnapshot.child("id").getValue().toString(), dataSnapshot.child("tr").getValue().toString(),dataSnapshot.child("en").getValue().toString(),dataSnapshot.child("link").getValue().toString(),ses);
+                        ogrenildi.add(word);
                     }
-
-                    Word word = new Word(dataSnapshot.child("id").getValue().toString(), dataSnapshot.child("tr").getValue().toString(),dataSnapshot.child("en").getValue().toString(),dataSnapshot.child("link").getValue().toString(),ses);
-                    ogrenildi.add(word);
-
                 }
                 adapterOgrendiklerim.notifyDataSetChanged();
 

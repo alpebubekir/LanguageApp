@@ -49,28 +49,32 @@ public class EnglishTurkish extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot: snapshot.getChildren())
                 {
-                    String ses = null;
-                    if (dataSnapshot.child("ses").getValue().toString() != "0" )
+                    if (!dataSnapshot.child("ogrenen").child(MainActivity.id).exists())
                     {
-                        ses = dataSnapshot.child("ses").getValue().toString();
-                    }
-
-                    Word word = new Word(dataSnapshot.getKey() ,dataSnapshot.child("tr").getValue().toString(),dataSnapshot.child("en").getValue().toString(),dataSnapshot.child("link").getValue().toString(),ses);
-
-                    boolean x = true;
-
-                    for (Word i: words)
-                    {
-                        if (i.getId() == word.getId())
+                        String ses = null;
+                        if (dataSnapshot.child("ses").getValue().toString() != "0" )
                         {
-                            x = false;
+                            ses = dataSnapshot.child("ses").getValue().toString();
+                        }
+
+                        Word word = new Word(dataSnapshot.getKey(), dataSnapshot.child("tr").getValue().toString(),dataSnapshot.child("en").getValue().toString(),dataSnapshot.child("link").getValue().toString(),ses);
+
+                        boolean x = true;
+
+                        for (Word i: words)
+                        {
+                            if (i.getId() == word.getId())
+                            {
+                                x = false;
+                            }
+                        }
+
+                        if (x)
+                        {
+                            words.add(word);
                         }
                     }
 
-                    if (x)
-                    {
-                        words.add(word);
-                    }
                 }
 
                 recyclerViewAdapter.notifyDataSetChanged();

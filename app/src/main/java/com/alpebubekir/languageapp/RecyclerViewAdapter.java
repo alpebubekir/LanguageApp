@@ -62,6 +62,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         ImageView image;
         Word word;
         Context context;
+        long childCount;
+        boolean isExist;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -73,36 +75,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 @Override
                 public void onClick(View view) {
 
-                    DatabaseReference ogrenildiRef = FirebaseDatabase.getInstance("https://languageapp-f2602-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Ogrenildi");
+                    DatabaseReference databaseReferance = FirebaseDatabase.getInstance("https://languageapp-f2602-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Ogren");
+                    databaseReferance = databaseReferance.child(word.getId());
+                    isExist = false;
 
-                    ogrenildiRef.addValueEventListener(new ValueEventListener() {
-                        boolean y = true;
+                    databaseReferance.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            boolean x=true;
-                            for (DataSnapshot dataSnapshot : snapshot.getChildren())
-                            {
-                                if (dataSnapshot.getKey().toString() == word.getId())
-                                {
-                                    x = false;
-                                }
-                            }
-
-                            if (x)
-                            {
-                                ogrenildiRef.child(word.getId()).setValue(word);
-                                DatabaseReference databaseReferenceOgren = FirebaseDatabase.getInstance("https://languageapp-f2602-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Ogren");
-                                databaseReferenceOgren.child(word.getId()).removeValue();
-
-                                Toast.makeText(context,"Tebrikler! Bu kelimeyi öğrendiniz!",Toast.LENGTH_SHORT).show();
-                                y = false;
-                            }
-
-                            else if(y)
-                            {
-                                Toast.makeText(context,"Bu kelimeyi zaten öğrendiniz!",Toast.LENGTH_SHORT).show();
-                                y = false;
-                            }
+                            childCount = snapshot.getChildrenCount();
                         }
 
                         @Override
@@ -110,6 +90,61 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
                         }
                     });
+
+                    if (childCount == 0)
+                    {
+                        databaseReferance.child("ogrenen").child(MainActivity.id).setValue(MainActivity.id);
+                        Toast.makeText(context,"Tebrikler!",Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        databaseReferance.child("ogrenen").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot dataSnapshot: snapshot.getChildren())
+                                {
+                                    if (dataSnapshot.getValue().equals(MainActivity.id))
+                                    {
+                                        isExist = true;
+                                        break;
+                                    }
+                                }
+
+                                if (isExist)
+                                {
+                                    Toast.makeText(context,"Bu kelimeyi zaten öğrendiniz.",Toast.LENGTH_SHORT).show();
+                                }
+
+                                else
+                                {
+                                    Toast.makeText(context,"Tebrikler! Bu kelimeyi öğrendiniz.",Toast.LENGTH_SHORT).show();
+                                    snapshot.child("ogrenen").child(MainActivity.id).getRef().setValue(MainActivity.id);
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+                        /*System.out.println(isExist);
+
+                        if (isExist)
+                        {
+                            System.out.println("def\n");
+                            Toast.makeText(context,"Bu kelimeyi zaten öğrendiniz.",Toast.LENGTH_SHORT).show();
+                        }
+
+                        else
+                        {
+                            System.out.println("abc\n");
+                            Toast.makeText(context,"Tebrikler! Bu kelimeyi öğrendiniz.",Toast.LENGTH_SHORT).show();
+                            databaseReferance.child("ogrenen").child(MainActivity.id).setValue(MainActivity.id);
+                        }*/
+                    }
+
                 }
             });
 
