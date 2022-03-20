@@ -5,7 +5,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,30 +26,34 @@ import java.util.ArrayList;
 
 public class EnglishTurkish extends AppCompatActivity {
 
-    RecyclerView recyclerView;
     DatabaseReference databaseReference;
-    RecyclerViewAdapter recyclerViewAdapter;
-    StorageReference storageRef;
+    TextView tr,en;
+    ImageView image;
     ArrayList<Word> words;
+    int position = 0;
+    ArrayList<Word> ogrendim;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_english_turkish);
 
-        recyclerView = findViewById(R.id.recyclerView);
+        tr = findViewById(R.id.textViewTR);
+        en = findViewById(R.id.textViewEN);
+        image = findViewById(R.id.imageViewWord);
+        System.out.println("def");
         databaseReference = FirebaseDatabase.getInstance("https://languageapp-f2602-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Ogren");
-        storageRef = FirebaseStorage.getInstance("gs://languageapp-f2602.appspot.com").getReference();
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         words = new ArrayList<>();
-        recyclerViewAdapter = new RecyclerViewAdapter(this,words);
-        recyclerView.setAdapter(recyclerViewAdapter);
+        ogrendim = new ArrayList<>();
+
+
+        System.out.println("abc");
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                System.out.println(MainActivity.id);
                 for (DataSnapshot dataSnapshot: snapshot.getChildren())
                 {
                     if (!dataSnapshot.child("ogrenen").child(MainActivity.id).exists())
@@ -73,20 +80,234 @@ public class EnglishTurkish extends AppCompatActivity {
                         {
                             words.add(word);
                         }
+
+                        tr.setText(words.get(position).getTr());
+                        en.setText(words.get(position).getEn());
+                        Picasso.with(EnglishTurkish.this).load(words.get(position).getLink()).into(image);
+                        image.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                MediaPlayer mediaPlayer = new MediaPlayer();
+
+                                try{
+                                    mediaPlayer.setDataSource(words.get(position).getSes());
+                                    mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                                        @Override
+                                        public void onPrepared(MediaPlayer mediaPlayer) {
+                                            mediaPlayer.start();
+                                        }
+                                    });
+
+                                    mediaPlayer.prepare();
+
+
+                                }catch (Exception e)
+                                {
+                                    e.printStackTrace();
+                                }
+
+                            }
+                        });
+                        //System.out.println(words.size());
                     }
 
                 }
 
-                recyclerViewAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+
+
+            }
+
+        });
+
+        findViewById(R.id.ogrendim).setOnClickListener(new View.OnClickListener() {
+            boolean isExist;
+            double childCount;
+            @Override
+            public void onClick(View view) {
+
+                DatabaseReference databaseReferance = FirebaseDatabase.getInstance("https://languageapp-f2602-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Ogren");
+                databaseReferance = databaseReferance.child(words.get(position).getId());
+                isExist = false;
+
+                databaseReferance.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        childCount = snapshot.getChildrenCount();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+                if (childCount == 0)
+                {
+                    databaseReferance.child("ogrenen").child(MainActivity.id).setValue(MainActivity.id);
+                    Toast.makeText(EnglishTurkish.this,"Tebrikler!",Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    databaseReferance.child("ogrenen").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot dataSnapshot: snapshot.getChildren())
+                            {
+                                if (dataSnapshot.getValue().equals(MainActivity.id))
+                                {
+                                    isExist = true;
+                                    break;
+                                }
+                            }
+
+                            if (isExist)
+                            {
+                                Toast.makeText(EnglishTurkish.this,"Bu kelimeyi zaten öğrendiniz.",Toast.LENGTH_SHORT).show();
+                            }
+
+                            else
+                            {
+                                Toast.makeText(EnglishTurkish.this,"Tebrikler! Bu kelimeyi öğrendiniz.",Toast.LENGTH_SHORT).show();
+                                snapshot.child("ogrenen").child(MainActivity.id).getRef().setValue(MainActivity.id);
+                            }
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+                        /*System.out.println(isExist);
+
+                        if (isExist)
+                        {
+                            System.out.println("def\n");
+                            Toast.makeText(context,"Bu kelimeyi zaten öğrendiniz.",Toast.LENGTH_SHORT).show();
+                        }
+
+                        else
+                        {
+                            System.out.println("abc\n");
+                            Toast.makeText(context,"Tebrikler! Bu kelimeyi öğrendiniz.",Toast.LENGTH_SHORT).show();
+                            databaseReferance.child("ogrenen").child(MainActivity.id).setValue(MainActivity.id);
+                        }*/
+                }
+
+            }
+        });
+
+
+
+    }
+
+    public void sonraki(View view)
+    {
+        if (position < words.size()-1) {
+            position++;
+            tr.setText(words.get(position).getTr());
+            en.setText(words.get(position).getEn());
+            Picasso.with(EnglishTurkish.this).load(words.get(position).getLink()).into(image);
+        }
+        else
+        {
+            Toast.makeText(this, "Kelimeler bitti.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void onceki(View view)
+    {
+        if (position != 0)
+        {
+            position--;
+            tr.setText(words.get(position).getTr());
+            en.setText(words.get(position).getEn());
+            Picasso.with(EnglishTurkish.this).load(words.get(position).getLink()).into(image);
+        }
+        else
+        {
+            Toast.makeText(this, "Kelimeler bitti.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /*public void ogrendim(View view)
+    {
+        DatabaseReference databaseReferance1 = FirebaseDatabase.getInstance("https://languageapp-f2602-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Ogren");
+        databaseReferance1 = databaseReferance1.child(words.get(position).getId());
+        final boolean[] isExist = {false};
+        final int[] childCount = new int[1];
+
+        databaseReferance1.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                childCount[0] = snapshot.getChildrenCount();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-
         });
 
-    }
+        if (childCount[0] == 0)
+        {
+            databaseReferance1.child("ogrenen").child(MainActivity.id).setValue(MainActivity.id);
+            Toast.makeText(this,"Tebrikler!",Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            databaseReferance1.child("ogrenen").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot dataSnapshot: snapshot.getChildren())
+                    {
+                        if (dataSnapshot.getValue().equals(MainActivity.id))
+                        {
+                            isExist[0] = true;
+                            break;
+                        }
+                    }
+
+                    if (isExist[0])
+                    {
+                        Toast.makeText(this,"Bu kelimeyi zaten öğrendiniz.",Toast.LENGTH_SHORT).show();
+                    }
+
+                    else
+                    {
+                        Toast.makeText(this,"Tebrikler! Bu kelimeyi öğrendiniz.",Toast.LENGTH_SHORT).show();
+                        snapshot.child("ogrenen").child(MainActivity.id).getRef().setValue(MainActivity.id);
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+                        System.out.println(isExist);
+
+                        if (isExist)
+                        {
+                            System.out.println("def\n");
+                            Toast.makeText(context,"Bu kelimeyi zaten öğrendiniz.",Toast.LENGTH_SHORT).show();
+                        }
+
+                        else
+                        {
+                            System.out.println("abc\n");
+                            Toast.makeText(context,"Tebrikler! Bu kelimeyi öğrendiniz.",Toast.LENGTH_SHORT).show();
+                            databaseReferance.child("ogrenen").child(MainActivity.id).setValue(MainActivity.id);
+                        }
+        }
+    }*/
 
 }
