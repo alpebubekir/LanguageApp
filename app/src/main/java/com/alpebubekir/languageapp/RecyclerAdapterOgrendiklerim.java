@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -59,5 +60,18 @@ public class RecyclerAdapterOgrendiklerim extends RecyclerView.Adapter<RecyclerA
     @Override
     public int getItemCount() {
         return words.size();
+    }
+
+
+    public void filterList (ArrayList<Word> filteredList)
+    {
+        words = filteredList;            //arama yapıldığında gösterilen para birimleri değiştirildi
+
+        if (filteredList.isEmpty())
+        {
+            Toast.makeText(context, "Kelime bulunamadı", Toast.LENGTH_SHORT).show();
+        }
+
+        notifyDataSetChanged();                             //adaptöre datada değişiklik olduğu bildirildi
     }
 }

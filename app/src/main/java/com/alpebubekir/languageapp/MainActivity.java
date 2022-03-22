@@ -14,8 +14,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity {
     static String id;
     SharedPreferences sharedPreferences;
@@ -79,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void ogrendiklerim(View view)
     {
-        Intent intent = new Intent(this,Ogrendiklerim.class);
+        Intent intent = new Intent(this, Ogrendiklerim.class);
         startActivity(intent);
     }
 

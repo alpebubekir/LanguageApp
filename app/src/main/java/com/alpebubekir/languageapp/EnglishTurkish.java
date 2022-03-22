@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
@@ -50,6 +51,7 @@ public class EnglishTurkish extends AppCompatActivity {
         tr = findViewById(R.id.textViewTR);
         en = findViewById(R.id.textViewEN);
         image = findViewById(R.id.imageViewWord);
+        final int[] sizeWords = new int[1];
         System.out.println("def");
         databaseReference = FirebaseDatabase.getInstance("https://languageapp-f2602-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Ogren");
 
@@ -88,7 +90,8 @@ public class EnglishTurkish extends AppCompatActivity {
                         {
                             words.add(word);
                         }
-
+                        sizeWords[0] = words.size();
+                        progressBar.setMax(sizeWords[0]);
                         tr.setText(words.get(position).getTr());
                         en.setText(words.get(position).getEn());
                         Picasso.with(EnglishTurkish.this).load(words.get(position).getLink()).into(image);
@@ -132,6 +135,7 @@ public class EnglishTurkish extends AppCompatActivity {
 
         });
 
+
         findViewById(R.id.ogrendim).setOnClickListener(new View.OnClickListener() {
             boolean isExist;
             double childCount;
@@ -159,6 +163,8 @@ public class EnglishTurkish extends AppCompatActivity {
                     databaseReferance.child("ogrenen").child(MainActivity.id).setValue(MainActivity.id);
                     Toast.makeText(EnglishTurkish.this,"Tebrikler! Bu kelimeyi öğrendiniz.",Toast.LENGTH_SHORT).show();
                     words.get(position).setOgrendi(true);
+                    sizeWords[0]--;
+                    progressBar.setMax(sizeWords[0]);
                 }
                 else
                 {
@@ -184,6 +190,8 @@ public class EnglishTurkish extends AppCompatActivity {
                                 Toast.makeText(EnglishTurkish.this,"Tebrikler! Bu kelimeyi öğrendiniz.",Toast.LENGTH_SHORT).show();
                                 snapshot.child("ogrenen").child(MainActivity.id).getRef().setValue(MainActivity.id);
                                 words.get(position).setOgrendi(true);
+                                sizeWords[0]--;
+                                progressBar.setMax(sizeWords[0]);
                             }
 
                         }
@@ -235,7 +243,7 @@ public class EnglishTurkish extends AppCompatActivity {
             else {
                 currentProgress = currentProgress + 1;
                 progressBar.setProgress(currentProgress);
-                progressBar.setMax(words.size());
+
                 position++;
                 tr.setText(words.get(position).getTr());
                 en.setText(words.get(position).getEn());
@@ -261,12 +269,21 @@ public class EnglishTurkish extends AppCompatActivity {
                 onceki(view);
             }
             else {
+                currentProgress = currentProgress - 1;
+                progressBar.setProgress(currentProgress);
+
                 position--;
                 tr.setText(words.get(position).getTr());
                 en.setText(words.get(position).getEn());
                 Picasso.with(EnglishTurkish.this).load(words.get(position).getLink()).into(image);
             }
         }
+    }
+
+    public void geri(View view)
+    {
+        Intent intent = new Intent(this,Ogren.class);
+        startActivity(intent);
     }
 
     /*public void ogrendim(View view)
