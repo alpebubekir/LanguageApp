@@ -188,7 +188,7 @@ public class EnglishTurkish extends AppCompatActivity {
                             else
                             {
                                 Toast.makeText(EnglishTurkish.this,"Tebrikler! Bu kelimeyi öğrendiniz.",Toast.LENGTH_SHORT).show();
-                                snapshot.child("ogrenen").child(MainActivity.id).getRef().setValue(MainActivity.id);
+                                snapshot.child(MainActivity.id).getRef().setValue(MainActivity.id);
                                 words.get(position).setOgrendi(true);
                                 sizeWords[0]--;
                                 progressBar.setMax(sizeWords[0]);
