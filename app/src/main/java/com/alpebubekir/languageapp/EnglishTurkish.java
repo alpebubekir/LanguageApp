@@ -2,15 +2,20 @@ package com.alpebubekir.languageapp;
 
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,21 +28,25 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
+import java.util.Currency;
 
 public class EnglishTurkish extends AppCompatActivity {
-
     DatabaseReference databaseReference;
     TextView tr,en;
     ImageView image;
     ArrayList<Word> words;
     int position = 0;
     ArrayList<Word> ogrendim;
+    private int currentProgress;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_english_turkish);
 
+        progressBar = findViewById(R.id.progress_horizontal);
+        currentProgress = 0;
         tr = findViewById(R.id.textViewTR);
         en = findViewById(R.id.textViewEN);
         image = findViewById(R.id.imageViewWord);
@@ -46,7 +55,6 @@ public class EnglishTurkish extends AppCompatActivity {
 
         words = new ArrayList<>();
         ogrendim = new ArrayList<>();
-
 
         System.out.println("abc");
 
@@ -149,7 +157,8 @@ public class EnglishTurkish extends AppCompatActivity {
                 if (childCount == 0)
                 {
                     databaseReferance.child("ogrenen").child(MainActivity.id).setValue(MainActivity.id);
-                    Toast.makeText(EnglishTurkish.this,"Tebrikler!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EnglishTurkish.this,"Tebrikler! Bu kelimeyi öğrendiniz.",Toast.LENGTH_SHORT).show();
+                    words.get(position).setOgrendi(true);
                 }
                 else
                 {
@@ -174,6 +183,7 @@ public class EnglishTurkish extends AppCompatActivity {
                             {
                                 Toast.makeText(EnglishTurkish.this,"Tebrikler! Bu kelimeyi öğrendiniz.",Toast.LENGTH_SHORT).show();
                                 snapshot.child("ogrenen").child(MainActivity.id).getRef().setValue(MainActivity.id);
+                                words.get(position).setOgrendi(true);
                             }
 
                         }
@@ -199,7 +209,7 @@ public class EnglishTurkish extends AppCompatActivity {
                             databaseReferance.child("ogrenen").child(MainActivity.id).setValue(MainActivity.id);
                         }*/
                 }
-
+                sonraki(view);
             }
         });
 
@@ -209,30 +219,53 @@ public class EnglishTurkish extends AppCompatActivity {
 
     public void sonraki(View view)
     {
-        if (position < words.size()-1) {
-            position++;
-            tr.setText(words.get(position).getTr());
-            en.setText(words.get(position).getEn());
-            Picasso.with(EnglishTurkish.this).load(words.get(position).getLink()).into(image);
-        }
-        else
+
+        if (!(position < words.size()-1))
         {
             Toast.makeText(this, "Kelimeler bitti.", Toast.LENGTH_SHORT).show();
         }
+
+        else
+        {
+            if (words.get(position+1).isOgrendi())
+            {
+                position++;
+                sonraki(view);
+            }
+            else {
+                currentProgress = currentProgress + 1;
+                progressBar.setProgress(currentProgress);
+                progressBar.setMax(words.size());
+                position++;
+                tr.setText(words.get(position).getTr());
+                en.setText(words.get(position).getEn());
+                Picasso.with(EnglishTurkish.this).load(words.get(position).getLink()).into(image);
+            }
+        }
+
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void onceki(View view)
     {
-        if (position != 0)
-        {
-            position--;
-            tr.setText(words.get(position).getTr());
-            en.setText(words.get(position).getEn());
-            Picasso.with(EnglishTurkish.this).load(words.get(position).getLink()).into(image);
-        }
-        else
+        if (position==0)
         {
             Toast.makeText(this, "Kelimeler bitti.", Toast.LENGTH_SHORT).show();
+        }
+
+        else
+        {
+            if (words.get(position-1).isOgrendi())
+            {
+                position--;
+                onceki(view);
+            }
+            else {
+                position--;
+                tr.setText(words.get(position).getTr());
+                en.setText(words.get(position).getEn());
+                Picasso.with(EnglishTurkish.this).load(words.get(position).getLink()).into(image);
+            }
         }
     }
 

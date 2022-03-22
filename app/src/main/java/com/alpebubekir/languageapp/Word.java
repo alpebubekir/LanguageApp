@@ -9,6 +9,7 @@ public class Word {
     private String link;
     private String ses;
     private String id;
+    private boolean ogrendi = false;
 
     public Word(String id,String tr, String en, String link,String ses) {
         this.tr = tr;
@@ -16,6 +17,14 @@ public class Word {
         this.link = link;
         this.ses = ses;
         this.id = id;
+    }
+
+    public boolean isOgrendi() {
+        return ogrendi;
+    }
+
+    public void setOgrendi(boolean ogrendi) {
+        this.ogrendi = ogrendi;
     }
 
     public String getTr() {

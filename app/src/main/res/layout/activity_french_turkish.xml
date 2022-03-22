@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".EnglishTurkish"
+    tools:context=".french_turkish"
     android:orientation="vertical"
     android:background="@color/background">
 
@@ -40,127 +40,119 @@
         android:layout_weight=".90"
         android:id="@+id/ogren_main">
 
-        <ProgressBar
-            android:padding="5dp"
-            android:id="@+id/progress_horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-            android:progressDrawable="@drawable/custom_progress"/>
-
         <LinearLayout
-            android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:orientation="vertical">
-
-
 
             <androidx.cardview.widget.CardView
 
                 android:layout_width="250dp"
                 android:layout_height="250dp"
-                app:cardCornerRadius="125dp"
                 android:layout_marginLeft="35dp"
+                app:cardCornerRadius="125dp"
                 app:cardPreventCornerOverlap="false">
 
                 <ImageView
                     android:id="@+id/imageViewWord"
-                    android:layout_marginLeft="25dp"
                     android:layout_width="200dp"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="25dp"
                     android:scaleType="fitCenter"
                     android:src="@drawable/stock_photo" />
 
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:layout_marginTop="50dp"
-                android:layout_width="320dp"
-                android:layout_height="70dp"
                 android:id="@+id/textViewTR"
-                android:drawableLeft="@drawable/turkey_flag"
-                android:background="#FFFFFF"
-                android:text="Kalem"
-                android:textAlignment="center"
-                android:fontFamily="@font/poppins"
-                android:textStyle="bold"
-                android:textColor="@color/text"
-                android:textSize="25sp"
-                android:padding="15dp"/>
-            <TextView
-                android:layout_marginTop="20dp"
                 android:layout_width="320dp"
                 android:layout_height="70dp"
-                android:id="@+id/textViewEN"
-                android:drawableLeft="@drawable/ogren_en"
+                android:layout_marginTop="70dp"
                 android:background="#FFFFFF"
+                android:drawableLeft="@drawable/turkey_flag"
+                android:fontFamily="@font/poppins"
+                android:padding="15dp"
                 android:text="Kalem"
                 android:textAlignment="center"
-                android:fontFamily="@font/poppins"
-                android:textStyle="bold"
                 android:textColor="@color/text"
                 android:textSize="25sp"
-                android:padding="15dp"/>
-            <androidx.cardview.widget.CardView
-                android:layout_marginLeft="125dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textViewEN"
+                android:layout_width="320dp"
+                android:layout_height="70dp"
                 android:layout_marginTop="20dp"
+                android:background="#FFFFFF"
+                android:drawableLeft="@drawable/france_flag_ogren"
+                android:fontFamily="@font/poppins"
+                android:padding="15dp"
+                android:text="Kalem"
+                android:textAlignment="center"
+                android:textColor="@color/text"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <androidx.cardview.widget.CardView
                 android:id="@+id/voice"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
+                android:layout_marginLeft="125dp"
+                android:layout_marginTop="20dp"
                 app:cardCornerRadius="40dp"
                 app:cardPreventCornerOverlap="false">
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="fitCenter"
                     android:background="@color/purple"
-                    android:src="@drawable/ic_baseline_mic_none_24"
-                    android:padding="10dp"/>
+                    android:padding="10dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_baseline_mic_none_24" />
 
             </androidx.cardview.widget.CardView>
 
             <LinearLayout
-                android:layout_marginTop="15dp"
                 android:layout_width="320dp"
                 android:layout_height="55dp"
-                android:orientation="horizontal"
-                >
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
 
                 <Button
-                    android:onClick="onceki"
-                    android:id="@+id/onceki"
+                    android:id="@+id/oncekiFr"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/ogrendim_button"
+                    android:fontFamily="@font/poppins"
+                    android:onClick="oncekiFr"
                     android:text="geri"
                     android:textColor="@color/white"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/poppins"/>
+                    android:textSize="20sp" />
+
                 <Button
-                    android:id="@+id/ogrendim"
+                    android:id="@+id/ogrendimFr"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="27dp"
                     android:background="@drawable/ogrendim"
-                    android:text="Öğrendim"
                     android:fontFamily="@font/poppins"
-                    android:textColor="@color/purple"/>
+                    android:text="Öğrendim"
+                    android:textColor="@color/purple" />
+
                 <Button
-                    android:onClick="sonraki"
-                    android:id="@+id/sonraki"
+                    android:id="@+id/sonrakiFr"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="27dp"
                     android:background="@drawable/ogrendim_button"
+                    android:fontFamily="@font/poppins"
+                    android:onClick="sonrakiFr"
                     android:text="ileri"
                     android:textColor="@color/white"
-                    android:textSize="20sp"
-                    android:layout_marginLeft="27dp"
-                    android:fontFamily="@font/poppins"/>
+                    android:textSize="20sp" />
 
             </LinearLayout>
-
 
 
         </LinearLayout>

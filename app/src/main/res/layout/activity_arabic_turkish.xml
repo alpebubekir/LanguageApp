@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".EnglishTurkish"
+    tools:context=".arabic_turkish"
     android:orientation="vertical"
     android:background="@color/background">
 
@@ -40,21 +40,11 @@
         android:layout_weight=".90"
         android:id="@+id/ogren_main">
 
-        <ProgressBar
-            android:padding="5dp"
-            android:id="@+id/progress_horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-            android:progressDrawable="@drawable/custom_progress"/>
-
         <LinearLayout
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-
 
             <androidx.cardview.widget.CardView
 
@@ -75,7 +65,7 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="70dp"
                 android:layout_width="320dp"
                 android:layout_height="70dp"
                 android:id="@+id/textViewTR"
@@ -93,7 +83,7 @@
                 android:layout_width="320dp"
                 android:layout_height="70dp"
                 android:id="@+id/textViewEN"
-                android:drawableLeft="@drawable/ogren_en"
+                android:drawableLeft="@drawable/arabic_flag_ogren"
                 android:background="#FFFFFF"
                 android:text="Kalem"
                 android:textAlignment="center"
@@ -129,8 +119,8 @@
                 >
 
                 <Button
-                    android:onClick="onceki"
-                    android:id="@+id/onceki"
+                    android:onClick="oncekiAr"
+                    android:id="@+id/oncekiAr"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/ogrendim_button"
@@ -139,7 +129,7 @@
                     android:textSize="20sp"
                     android:fontFamily="@font/poppins"/>
                 <Button
-                    android:id="@+id/ogrendim"
+                    android:id="@+id/ogrendimAr"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="27dp"
@@ -148,8 +138,8 @@
                     android:fontFamily="@font/poppins"
                     android:textColor="@color/purple"/>
                 <Button
-                    android:onClick="sonraki"
-                    android:id="@+id/sonraki"
+                    android:onClick="sonrakiAr"
+                    android:id="@+id/sonrakiAr"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/ogrendim_button"

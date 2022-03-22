@@ -3,12 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/alpeb/AndroidStudioProjects/LanguageApp/app/src/main/res/drawable/ic_baseline_check_box_24 (2).xml" value="0.18" />
         <entry key="..\:/Users/alpeb/AndroidStudioProjects/LanguageApp/app/src/main/res/layout/activity_english_turkish.xml" value="0.25" />
         <entry key="..\:/Users/alpeb/AndroidStudioProjects/LanguageApp/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/alpeb/AndroidStudioProjects/LanguageApp/app/src/main/res/layout/activity_ogren (2).xml" value="0.25" />
         <entry key="..\:/Users/alpeb/AndroidStudioProjects/LanguageApp/app/src/main/res/layout/activity_ogren.xml" value="0.25" />
         <entry key="..\:/Users/alpeb/AndroidStudioProjects/LanguageApp/app/src/main/res/layout/activity_ogrendiklerim.xml" value="0.25" />
         <entry key="..\:/Users/alpeb/AndroidStudioProjects/LanguageApp/app/src/main/res/layout/cards.xml" value="0.25" />
         <entry key="..\:/Users/alpeb/AndroidStudioProjects/LanguageApp/app/src/main/res/layout/cards2.xml" value="0.25" />
+        <entry key="..\:/Users/alpeb/AndroidStudioProjects/LanguageApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher (2).xml" value="0.121" />
         <entry key="..\:/Users/alpeb/AndroidStudioProjects/LanguageApp/app/src/main/res/xml/words.xml" value="0.25" />
       </map>
     </option>
