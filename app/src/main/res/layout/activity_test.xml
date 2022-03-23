@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".Ogren"
+    android:background="@color/background">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".25"
+        tools:ignore="Suspicious0dp">
+
+        <TextView
+            android:layout_marginTop="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Test"
+            android:textColor="#373737"
+            android:textSize="25sp"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/firstTitle"
+            android:fontFamily="@font/poppins"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:textAlignment="center"
+            android:text="Yazılacak şeyi bul!"
+            android:textColor="#A1A1A1"
+            android:layout_below="@+id/firstTitle"
+            android:textSize="15sp"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/description"
+            android:fontFamily="@font/poppins"
+            android:textStyle="bold"
+            />
+
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".75"
+        tools:ignore="Suspicious0dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cardsLayout"
+            android:orientation="vertical"
+            android:layout_centerInParent="true">
+
+            <RelativeLayout
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/cards1">
+
+                <androidx.cardview.widget.CardView
+                    android:onClick="englishTurkish"
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:background="@drawable/card_frame">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="7dp">
+
+                        <TextView
+                            android:layout_marginLeft="11dp"
+                            android:id="@+id/englishWords"
+                            android:layout_width="78dp"
+                            android:layout_height="wrap_content"
+                            android:text="İngilizce"
+                            android:textColor="@color/text"
+                            android:textStyle="bold"
+                            android:textSize="14sp"
+                            android:textAlignment="center"
+                            android:fontFamily="@font/poppins"/>
+                        <TextView
+                            android:layout_marginLeft="11dp"
+                            android:layout_marginTop="2dp"
+                            android:id="@+id/englishWordNumbers"
+                            android:layout_width="78dp"
+                            android:layout_height="wrap_content"
+                            android:text="100 kelime"
+                            android:textColor="@color/grey"
+                            android:fontFamily="@font/poppins"
+                            android:textSize="12sp"
+                            android:textAlignment="center"/>
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/profile_image"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            app:cardCornerRadius="75dp"
+                            app:cardPreventCornerOverlap="false">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/english_flag"/>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <Button
+                            android:layout_marginTop="15dp"
+                            android:layout_width="100dp"
+                            android:layout_height="25dp"
+                            android:background="@drawable/button_style"
+                            android:text="BAŞLA"
+                            android:onClick="englishTurkish"
+                            android:fontFamily="@font/poppins"
+                            android:textColor="@color/background"
+                            android:textAlignment="center"
+                            android:padding="2dp"/>
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/card_frame"
+                    >
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="7dp">
+
+                        <TextView
+                            android:layout_marginLeft="11dp"
+                            android:id="@+id/frenchWords"
+                            android:layout_width="78dp"
+                            android:layout_height="wrap_content"
+                            android:text="Fransızca"
+                            android:textColor="@color/text"
+                            android:textStyle="bold"
+                            android:textSize="14sp"
+                            android:textAlignment="center"
+                            android:fontFamily="@font/poppins"/>
+                        <TextView
+                            android:layout_marginLeft="11dp"
+                            android:layout_marginTop="2dp"
+                            android:id="@+id/frenchWordNumbers"
+                            android:layout_width="78dp"
+                            android:layout_height="wrap_content"
+                            android:text="59 kelime"
+                            android:textColor="@color/grey"
+                            android:fontFamily="@font/poppins"
+                            android:textSize="12sp"
+                            android:textAlignment="center"/>
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            app:cardCornerRadius="75dp"
+                            app:cardPreventCornerOverlap="false">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/profile_image2"/>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <Button
+                            android:layout_marginTop="15dp"
+                            android:layout_width="100dp"
+                            android:layout_height="25dp"
+                            android:background="@drawable/button_style"
+                            android:text="BAŞLA"
+                            android:fontFamily="@font/poppins"
+                            android:textColor="@color/background"
+                            android:textAlignment="center"
+                            android:padding="2dp"/>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/cards2"
+                android:layout_marginTop="10dp">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:background="@drawable/card_frame">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="7dp">
+
+                        <TextView
+                            android:layout_marginLeft="11dp"
+                            android:id="@+id/arabicWords"
+                            android:layout_width="78dp"
+                            android:layout_height="wrap_content"
+                            android:text="Arapça"
+                            android:textColor="@color/text"
+                            android:textStyle="bold"
+                            android:textSize="14sp"
+                            android:textAlignment="center"
+                            android:fontFamily="@font/poppins"/>
+                        <TextView
+                            android:layout_marginLeft="11dp"
+                            android:layout_marginTop="2dp"
+                            android:id="@+id/arabicWordNumbers"
+                            android:layout_width="78dp"
+                            android:layout_height="wrap_content"
+                            android:text="20 kelime"
+                            android:textColor="@color/grey"
+                            android:fontFamily="@font/poppins"
+                            android:textSize="12sp"
+                            android:textAlignment="center"/>
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            app:cardCornerRadius="75dp"
+                            app:cardPreventCornerOverlap="false">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/arabic_flag"/>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <Button
+                            android:layout_marginTop="15dp"
+                            android:layout_width="100dp"
+                            android:layout_height="25dp"
+                            android:background="@drawable/button_style"
+                            android:text="BAŞLA"
+                            android:fontFamily="@font/poppins"
+                            android:textColor="@color/background"
+                            android:textAlignment="center"
+                            android:padding="2dp"/>
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/card_frame"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="7dp">
+
+                        <TextView
+                            android:layout_marginLeft="11dp"
+                            android:id="@+id/spanishWords"
+                            android:layout_width="78dp"
+                            android:layout_height="wrap_content"
+                            android:text="İspanyolca"
+                            android:textColor="@color/text"
+                            android:textStyle="bold"
+                            android:textSize="14sp"
+                            android:textAlignment="center"
+                            android:fontFamily="@font/poppins"/>
+                        <TextView
+                            android:layout_marginLeft="11dp"
+                            android:layout_marginTop="2dp"
+                            android:id="@+id/spanishWordNumbers"
+                            android:layout_width="78dp"
+                            android:layout_height="wrap_content"
+                            android:text="20 kelime"
+                            android:textColor="@color/grey"
+                            android:fontFamily="@font/poppins"
+                            android:textSize="12sp"
+                            android:textAlignment="center"/>
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            app:cardCornerRadius="75dp"
+                            app:cardPreventCornerOverlap="false">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/spain_flag"/>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <Button
+                            android:layout_marginTop="15dp"
+                            android:layout_width="100dp"
+                            android:layout_height="25dp"
+                            android:background="@drawable/button_style"
+                            android:text="BAŞLA"
+                            android:fontFamily="@font/poppins"
+                            android:textColor="@color/background"
+                            android:textAlignment="center"
+                            android:padding="2dp"/>
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/cards3"
+                android:layout_marginTop="10dp">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:background="@drawable/card_frame">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="7dp">
+
+                        <TextView
+                            android:layout_marginLeft="11dp"
+                            android:id="@+id/arabiccWords"
+                            android:layout_width="78dp"
+                            android:layout_height="wrap_content"
+                            android:text="Arapça"
+                            android:textColor="@color/text"
+                            android:textStyle="bold"
+                            android:textSize="14sp"
+                            android:textAlignment="center"
+                            android:fontFamily="@font/poppins"/>
+                        <TextView
+                            android:layout_marginLeft="11dp"
+                            android:layout_marginTop="2dp"
+                            android:id="@+id/arabiccWordNumbers"
+                            android:layout_width="78dp"
+                            android:layout_height="wrap_content"
+                            android:text="20 kelime"
+                            android:textColor="@color/grey"
+                            android:fontFamily="@font/poppins"
+                            android:textSize="12sp"
+                            android:textAlignment="center"/>
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            app:cardCornerRadius="75dp"
+                            app:cardPreventCornerOverlap="false">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/arabic_flag"/>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <Button
+                            android:layout_marginTop="15dp"
+                            android:layout_width="100dp"
+                            android:layout_height="25dp"
+                            android:background="@drawable/button_style"
+                            android:text="BAŞLA"
+                            android:fontFamily="@font/poppins"
+                            android:textColor="@color/background"
+                            android:textAlignment="center"
+                            android:padding="2dp"/>
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/card_frame">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="7dp">
+
+                        <TextView
+                            android:layout_marginLeft="11dp"
+                            android:id="@+id/spanishhWords"
+                            android:layout_width="78dp"
+                            android:layout_height="wrap_content"
+                            android:text="İspanyolca"
+                            android:textColor="@color/text"
+                            android:textStyle="bold"
+                            android:textSize="14sp"
+                            android:textAlignment="center"
+                            android:fontFamily="@font/poppins"/>
+                        <TextView
+                            android:layout_marginLeft="11dp"
+                            android:layout_marginTop="2dp"
+                            android:id="@+id/spanishhWordNumbers"
+                            android:layout_width="78dp"
+                            android:layout_height="wrap_content"
+                            android:text="20 kelime"
+                            android:textColor="@color/grey"
+                            android:fontFamily="@font/poppins"
+                            android:textSize="12sp"
+                            android:textAlignment="center"/>
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            app:cardCornerRadius="75dp"
+                            app:cardPreventCornerOverlap="false">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/spain_flag"/>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <Button
+                            android:layout_marginTop="15dp"
+                            android:layout_width="100dp"
+                            android:layout_height="25dp"
+                            android:background="@drawable/button_style"
+                            android:text="BAŞLA"
+                            android:fontFamily="@font/poppins"
+                            android:textColor="@color/background"
+                            android:textAlignment="center"
+                            android:padding="2dp"/>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

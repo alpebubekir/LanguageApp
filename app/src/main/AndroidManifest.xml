@@ -13,6 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LanguageApp">
         <activity
+            android:name=".Test"
+            android:exported="false" />
+        <activity
+            android:name=".TestEn"
+            android:exported="false" />
+        <activity
             android:name=".Ogrendiklerim"
             android:exported="false" />
         <activity
